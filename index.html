@@ -20,35 +20,15 @@
         extend: {
           fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] },
           colors: {
-            base: {
-              900: '#0b1220',
-              800: '#0f172a',
-              700: '#111827'
-            },
-            accent: {
-              50: '#eef2ff',
-              400: '#60a5fa',
-              500: '#6366f1',
-              600: '#4f46e5'
-            }
+            base: { 900:'#0b1220', 800:'#0f172a', 700:'#111827' },
+            accent: { 50:'#eef2ff', 400:'#60a5fa', 500:'#6366f1', 600:'#4f46e5' }
           },
-          boxShadow: {
-            'glow': '0 0 0 3px rgba(99,102,241,0.25), 0 20px 40px rgba(0,0,0,0.35)'
-          },
+          boxShadow: { glow:'0 0 0 3px rgba(99,102,241,0.25), 0 20px 40px rgba(0,0,0,0.35)' },
           keyframes: {
-            'gradient-x': {
-              '0%, 100%': { 'background-position': '0% 50%' },
-              '50%': { 'background-position': '100% 50%' }
-            },
-            float: {
-              '0%, 100%': { transform: 'translateY(0)' },
-              '50%': { transform: 'translateY(-8px)' }
-            }
+            'gradient-x': {'0%,100%':{'background-position':'0% 50%'}, '50%':{'background-position':'100% 50%'}},
+            float: {'0%,100%':{transform:'translateY(0)'}, '50%':{transform:'translateY(-8px)'}}
           },
-          animation: {
-            'gradient-x': 'gradient-x 12s ease infinite',
-            float: 'float 6s ease-in-out infinite'
-          }
+          animation: { 'gradient-x':'gradient-x 12s ease infinite', float:'float 6s ease-in-out infinite' }
         }
       }
     }
@@ -57,19 +37,49 @@
   <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <!-- tsparticles (Particles Background) -->
   <script src="https://cdn.jsdelivr.net/npm/tsparticles@3/tsparticles.bundle.min.js"></script>
+
   <style>
     :root { color-scheme: dark; }
     html, body { height: 100%; }
     /* Subtle radial vignette */
     body::before {
       content: ""; position: fixed; inset: 0; pointer-events: none;
-      background: radial-gradient(60rem 40rem at 70% -10%, rgba(99,102,241,0.25), transparent 60%),
-                  radial-gradient(40rem 30rem at -10% 30%, rgba(96,165,250,0.2), transparent 60%);
+      background:
+        radial-gradient(60rem 40rem at 70% -10%, rgba(99,102,241,0.25), transparent 60%),
+        radial-gradient(40rem 30rem at -10% 30%, rgba(96,165,250,0.2), transparent 60%);
       z-index: -1;
     }
-    /* Glass effect */
+    /* Glass cards */
     .glass { backdrop-filter: blur(10px); background: rgba(15, 23, 42, 0.55); }
     .section { scroll-margin-top: 96px; }
+
+    /* Badges, CTAs, Cards */
+    .badge { display:inline-block; padding:.35rem .6rem; border-radius:.75rem; background:rgba(148,163,184,.12); border:1px solid rgba(255,255,255,.08); }
+    .cta { display:inline-block; padding:.55rem .9rem; border-radius:.9rem; background:rgba(99,102,241,.2); border:1px solid rgba(99,102,241,.4); }
+    .cta:hover { background:rgba(99,102,241,.3); }
+    .cta.secondary { background:transparent; border:1px solid rgba(255,255,255,.15); }
+    .project-card { background: rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:1.25rem; overflow:hidden; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+    .timeline-item { position: relative; }
+    .timeline-item .dot { position:absolute; left:-10px; top:.35rem; width:.75rem; height:.75rem; border-radius:9999px; background:#6366f1; box-shadow:0 0 0 4px rgba(99,102,241,.15); }
+
+    /* Experience chips layout */
+    .xp-grid { margin-top: .25rem; }
+    .xp-chip { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.10); border-radius: .9rem; padding: .6rem .8rem; }
+    .timeline-item + .timeline-item { margin-top: 2rem; }
+
+    /* ===== Netflix Theme ===== */
+    body.netflix { background-color: #0b0b0b; }
+    body.netflix::before {
+      background:
+        radial-gradient(60rem 40rem at 70% -10%, rgba(229,9,20,0.18), transparent 60%),
+        radial-gradient(40rem 30rem at -10% 30%, rgba(244,6,18,0.15), transparent 60%);
+    }
+    .netflix .glass { background: rgba(12,12,12,0.6); }
+    .netflix .cta { background: rgba(229,9,20,0.2); border-color: rgba(229,9,20,0.5); }
+    .netflix .cta:hover { background: rgba(229,9,20,0.3); }
+    .netflix .project-card { border-color: rgba(255,255,255,0.10); background: rgba(255,255,255,0.03); }
+    .netflix .timeline-item .dot { background:#e50914; box-shadow:0 0 0 4px rgba(229,9,20,.2); }
+    .netflix .xp-chip { background: rgba(229,9,20,0.06); border-color: rgba(229,9,20,0.25); }
   </style>
 </head>
 <body class="bg-base-900 text-slate-100 antialiased">
@@ -92,7 +102,7 @@
             <a href="#contact" class="hover:text-white/90 text-white/70">Contact</a>
           </div>
           <div class="flex items-center gap-3">
-            <button id="themeToggle" class="rounded-xl px-3 py-2 text-xs font-medium border border-white/10 hover:border-white/20">Theme</button>
+            <button id="themeToggle" class="rounded-xl px-3 py-2 text-xs font-medium border border-white/10 hover:border-white/20">Netflix Theme</button>
             <button class="md:hidden" id="menuBtn" aria-label="Open Menu">
               <svg width="24" height="24" fill="none" stroke="currentColor" class="opacity-80"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
             </button>
@@ -120,20 +130,24 @@
         <div data-aos="fade-up" data-aos-delay="50">
           <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
             <span class="inline-block h-2 w-2 rounded-full bg-accent-500 animate-pulse"></span>
-            Available for ML/DS roles
+            Open to Data/AI roles
           </span>
           <h1 class="mt-5 text-4xl sm:text-5xl font-extrabold leading-tight">
             Hi, I'm <span class="text-accent-400">Aayush</span> —
             <span class="block mt-1 bg-gradient-to-r from-accent-500 via-sky-400 to-fuchsia-400 bg-clip-text text-transparent animate-gradient-x">Data Scientist & ML Engineer</span>
           </h1>
-          <p class="mt-5 text-white/80 max-w-xl">I build production‑ready ML systems and data products. My work spans ETL pipelines, model training & deployment, explainability (SHAP), and interactive dashboards. Explore my projects, experience, and technical toolkit below.</p>
+          <p class="mt-5 text-white/80 max-w-xl">I build production-ready ML systems and data products. Explore my projects, experience, and technical toolkit below.</p>
           <div class="mt-8 flex flex-wrap gap-3">
             <a href="#projects" class="rounded-xl bg-accent-600 hover:bg-accent-500 px-5 py-3 text-sm font-semibold shadow-glow">View Projects</a>
             <a href="#resume" class="rounded-xl border border-white/10 hover:border-white/20 px-5 py-3 text-sm font-semibold">Download Resume</a>
           </div>
+          <!-- Roles Badges -->
+          <div class="mt-6 flex flex-wrap gap-2 text-xs">
+            <span class="badge">Data Analyst</span><span class="badge">Data Scientist</span><span class="badge">Business Analyst</span>
+            <span class="badge">Python Developer</span><span class="badge">Machine Learning Engineer</span><span class="badge">Data Engineer</span><span class="badge">AI/ML Research</span>
+          </div>
         </div>
         <div class="relative" data-aos="fade-up" data-aos-delay="150">
-          <!-- Decorative blob -->
           <div class="absolute -top-8 -left-8 -z-10 h-40 w-40 rounded-full bg-gradient-to-tr from-accent-600/30 to-sky-400/30 blur-3xl"></div>
           <div class="glass rounded-3xl border border-white/10 p-4 shadow-glow">
             <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200&auto=format&fit=crop" alt="Abstract technology" class="rounded-2xl w-full h-72 object-cover animate-float" loading="lazy">
@@ -154,16 +168,38 @@
       <div class="grid md:grid-cols-3 gap-8 items-start">
         <div class="md:col-span-1" data-aos="fade-right">
           <h2 class="text-2xl font-bold">About Me</h2>
-          <p class="mt-2 text-white/70">A brief summary of who you are, what you do, and what you’re passionate about.</p>
+          <p class="mt-2 text-white/70">A fuller summary of my profile and focus areas.</p>
         </div>
         <div class="md:col-span-2" data-aos="fade-left">
-          <div class="glass rounded-2xl border border-white/10 p-6 leading-relaxed">
-            <p class="text-white/80">Machine Learning Engineer with experience in building end‑to‑end systems: data engineering (HDFS, Kafka, dbt), model development (LightGBM, XGBoost, LSTM), MLOps (Docker, CI/CD), and explainability (SHAP). Strong foundation in Python, SQL, and cloud (AWS/GCP). I like turning messy data into reliable products with measurable business impact.</p>
-            <ul class="mt-5 grid sm:grid-cols-2 gap-3 text-white/80 text-sm">
-              <li>⚙️ Production‑grade pipelines & APIs</li>
-              <li>📈 Backtesting & model monitoring</li>
-              <li>🔍 Interpretability & fairness</li>
-              <li>🧪 Experimentation & A/B testing</li>
+          <div class="glass rounded-2xl border border-white/10 p-6 leading-relaxed text-white/80">
+            <p>
+              I’m a Machine Learning Engineer and Data Scientist with hands-on experience building
+              end-to-end data products: <strong>data engineering</strong> (Spark/Sqoop, dbt, BigQuery, AWS/GCP),
+              <strong>modeling</strong> (XGBoost, LightGBM, LSTM, NLP with BERT), and <strong>MLOps</strong> (Docker, Kubernetes, CI/CD, Terraform).
+              I care about reliability, explainability (SHAP), and measurable business impact.
+            </p>
+            <p class="mt-3">
+              Recently at <strong>Cap Bon Consulting</strong> I engineered predictive pipelines for multi-asset financial data,
+              improving model stability and backtest rigor. As a <strong>Software Engineer at ANG Infotech</strong>,
+              I built large-scale ETL on Hadoop/AWS (1TB+/day), optimized databases (-60% query time), and
+              pushed 99.9% uptime. At <strong>Deloitte</strong>, I delivered analytical dashboards and predictive models that
+              reduced analysis turnaround and surfaced audit-ready insights.
+            </p>
+            <p class="mt-3">
+              I’ve built projects like <strong>MediRisk AI</strong> (clinical risk with explainability),
+              <strong>TaxiFlow</strong> (NYC taxi data engineering with dbt/Kestra/BigQuery),
+              and <strong>NewsVision</strong> (hybrid recommender with SBERT+SVD).
+              Academically, I completed an <strong>MS in Data Science</strong> (Rutgers, Dept. of Statistics),
+              an <strong>MBA in Technology Management</strong> (BI & Analytics), and a <strong>B.Tech in Computer Science</strong> (IT Dept),
+              with coursework spanning algorithms, statistical learning, NLP, and algorithmic trading.
+            </p>
+            <ul class="mt-4 grid sm:grid-cols-2 gap-2 text-sm">
+              <li class="badge">ETL & Data Warehousing</li>
+              <li class="badge">Model Development & Evaluation</li>
+              <li class="badge">Explainability (SHAP)</li>
+              <li class="badge">MLOps & Cloud (AWS/GCP)</li>
+              <li class="badge">Dashboards & APIs</li>
+              <li class="badge">Backtesting & Monitoring</li>
             </ul>
           </div>
         </div>
@@ -176,24 +212,87 @@
     <div class="max-w-7xl mx-auto px-4">
       <h2 class="text-2xl font-bold mb-8" data-aos="fade-up">Technical Skills</h2>
       <div class="grid md:grid-cols-3 gap-6" data-aos="fade-up" data-aos-delay="100">
+
         <div class="glass rounded-2xl border border-white/10 p-6">
-          <h3 class="font-semibold mb-3">Languages & Core</h3>
+          <h3 class="font-semibold mb-3">Programming Languages</h3>
           <div class="flex flex-wrap gap-2 text-sm">
-            <span class="badge">Python</span><span class="badge">SQL</span><span class="badge">Java</span><span class="badge">R</span><span class="badge">C++</span>
+            <span class="badge">Python</span><span class="badge">Java</span><span class="badge">C++</span>
+            <span class="badge">R</span><span class="badge">SQL</span><span class="badge">JavaScript</span>
+            <span class="badge">Go (familiar)</span>
           </div>
         </div>
+
         <div class="glass rounded-2xl border border-white/10 p-6">
-          <h3 class="font-semibold mb-3">ML / Data</h3>
+          <h3 class="font-semibold mb-3">Core CS & SWE</h3>
           <div class="flex flex-wrap gap-2 text-sm">
-            <span class="badge">Scikit‑learn</span><span class="badge">XGBoost</span><span class="badge">LightGBM</span><span class="badge">PyTorch</span><span class="badge">NLP (BERT)</span><span class="badge">SHAP</span>
+            <span class="badge">Data Structures & Algorithms</span><span class="badge">OOP</span>
+            <span class="badge">Design Patterns</span><span class="badge">System Design</span>
+            <span class="badge">Distributed Systems</span>
           </div>
         </div>
+
         <div class="glass rounded-2xl border border-white/10 p-6">
-          <h3 class="font-semibold mb-3">Platforms & Tools</h3>
+          <h3 class="font-semibold mb-3">Frameworks & Libraries</h3>
           <div class="flex flex-wrap gap-2 text-sm">
-            <span class="badge">AWS</span><span class="badge">GCP</span><span class="badge">Docker</span><span class="badge">Kubernetes</span><span class="badge">Airflow/dbt</span><span class="badge">Kafka</span>
+            <span class="badge">TensorFlow</span><span class="badge">PyTorch</span><span class="badge">Scikit-learn</span>
+            <span class="badge">Flask</span><span class="badge">.NET</span><span class="badge">Pandas</span>
+            <span class="badge">NumPy</span><span class="badge">Matplotlib</span><span class="badge">Seaborn</span><span class="badge">Plotly</span><span class="badge">APIs</span>
           </div>
         </div>
+
+        <div class="glass rounded-2xl border border-white/10 p-6">
+          <h3 class="font-semibold mb-3">Databases & Storage</h3>
+          <div class="flex flex-wrap gap-2 text-sm">
+            <span class="badge">MySQL</span><span class="badge">PostgreSQL</span><span class="badge">SQL Server</span>
+            <span class="badge">Oracle SQL</span><span class="badge">MongoDB</span><span class="badge">DynamoDB</span>
+            <span class="badge">BigQuery</span><span class="badge">Redis</span>
+          </div>
+        </div>
+
+        <div class="glass rounded-2xl border border-white/10 p-6">
+          <h3 class="font-semibold mb-3">Cloud Platforms</h3>
+          <div class="flex flex-wrap gap-2 text-sm">
+            <span class="badge">AWS (EC2, S3, RDS, Lambda, SNS, SQS, Elastic Beanstalk)</span>
+            <span class="badge">GCP (BigQuery, GKE, Dataproc)</span>
+            <span class="badge">Azure (basic)</span>
+          </div>
+        </div>
+
+        <div class="glass rounded-2xl border border-white/10 p-6">
+          <h3 class="font-semibold mb-3">DevOps & Infrastructure</h3>
+          <div class="flex flex-wrap gap-2 text-sm">
+            <span class="badge">Docker</span><span class="badge">Kubernetes</span><span class="badge">Terraform</span>
+            <span class="badge">Git</span><span class="badge">GitHub Actions</span><span class="badge">Jenkins</span>
+            <span class="badge">CI/CD Pipelines</span>
+          </div>
+        </div>
+
+        <div class="glass rounded-2xl border border-white/10 p-6">
+          <h3 class="font-semibold mb-3">Data Engineering & ETL</h3>
+          <div class="flex flex-wrap gap-2 text-sm">
+            <span class="badge">ETL (Sqoop, Spark, Python)</span><span class="badge">Data Modelling</span>
+            <span class="badge">Feature Engineering</span><span class="badge">dbt</span><span class="badge">BigQuery</span>
+            <span class="badge">Data Warehousing</span>
+          </div>
+        </div>
+
+        <div class="glass rounded-2xl border border-white/10 p-6">
+          <h3 class="font-semibold mb-3">Machine Learning & AI</h3>
+          <div class="flex flex-wrap gap-2 text-sm">
+            <span class="badge">XGBoost</span><span class="badge">LightGBM</span><span class="badge">Random Forest</span>
+            <span class="badge">LSTM</span><span class="badge">NLP (BERT, T5, spaCy)</span>
+            <span class="badge">SHAP</span><span class="badge">MLOps</span>
+          </div>
+        </div>
+
+        <div class="glass rounded-2xl border border-white/10 p-6">
+          <h3 class="font-semibold mb-3">Tools & Other</h3>
+          <div class="flex flex-wrap gap-2 text-sm">
+            <span class="badge">Tableau</span><span class="badge">Power BI</span><span class="badge">Excel (Advanced)</span>
+            <span class="badge">VBA Macros</span><span class="badge">Jupyter Notebooks</span><span class="badge">R Shiny</span>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -203,110 +302,249 @@
     <div class="max-w-7xl mx-auto px-4">
       <div class="flex items-end justify-between mb-8">
         <h2 class="text-2xl font-bold" data-aos="fade-up">Projects</h2>
-        <a href="https://github.com/aayush2912" target="_blank" class="text-sm text-white/70 hover:text-white" data-aos="fade-up" data-aos-delay="50">View all →</a>
+        <div class="flex items-center gap-4" data-aos="fade-up" data-aos-delay="50">
+          <a href="https://github.com/aayush2912" target="_blank" class="text-sm text-white/70 hover:text-white">GitHub →</a>
+          <button id="seeMoreBtn" class="text-sm rounded-lg border border-white/15 px-3 py-1.5 hover:border-white/30">See more</button>
+        </div>
       </div>
-      <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6" data-aos="fade-up" data-aos-delay="100">
-        <!-- Card Template -->
-        <article class="project-card">
-          <div class="p-4">
-            <img class="rounded-xl w-full h-40 object-cover" src="https://images.unsplash.com/photo-1533399865496-585fcd50f3fd?q=80&w=1200&auto=format&fit=crop" alt="Project cover" loading="lazy"/>
+
+      <!-- Top 3 Projects ONLY (with cover images) -->
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <!-- MediRisk AI -->
+        <article class="project-card overflow-hidden">
+          <div class="h-40 w-full overflow-hidden">
+            <img
+              class="w-full h-40 object-cover"
+              src="https://images.unsplash.com/photo-1511174511562-5f7f18b874f8?q=80&w=1600&auto=format&fit=crop"
+              alt="Medical theme"
+              loading="lazy"
+              onerror="this.onerror=null;this.src='https://placehold.co/1200x400?text=Medical+Project';"
+            />
           </div>
-          <div class="px-5 pb-5">
-            <h3 class="text-lg font-semibold">CrAIpto – Crypto Forecasting Dashboard</h3>
-            <p class="mt-1 text-sm text-white/70">LSTM + XGBoost hybrid, Streamlit UI, auto‑retraining with drift detection, SHAP explainability.</p>
-            <div class="mt-3 flex flex-wrap gap-2 text-xs">
-              <span class="badge">Python</span><span class="badge">LSTM</span><span class="badge">XGBoost</span><span class="badge">PostgreSQL</span>
-            </div>
-            <div class="mt-4 flex gap-3 text-sm">
-              <a class="cta" href="#" target="_blank">Live</a>
-              <a class="cta secondary" href="#" target="_blank">Code</a>
-            </div>
-          </div>
-        </article>
-        <article class="project-card">
-          <div class="p-4">
-            <img class="rounded-xl w-full h-40 object-cover" src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop" alt="Project cover" loading="lazy"/>
-          </div>
-          <div class="px-5 pb-5">
-            <h3 class="text-lg font-semibold">NewsVision – Personalized Recommender</h3>
-            <p class="mt-1 text-sm text-white/70">Hybrid content + collaborative filtering (SBERT + SVD), Flask API, Redis caching, AWS.</p>
-            <div class="mt-3 flex flex-wrap gap-2 text-xs">
-              <span class="badge">PyTorch</span><span class="badge">SBERT</span><span class="badge">Flask</span><span class="badge">Redis</span>
-            </div>
-            <div class="mt-4 flex gap-3 text-sm">
-              <a class="cta" href="#" target="_blank">Live</a>
-              <a class="cta secondary" href="#" target="_blank">Code</a>
+          <div class="px-5 py-4">
+            <h3 class="text-lg font-semibold">MediRisk AI – Heart Disease Risk Prediction & Clinical Decision Support</h3>
+            <p class="mt-1 text-sm text-white/70">Clinical risk platform with SHAP explainability, decision curve analysis, and what-if simulations. Models: LightGBM/CatBoost; Streamlit UI.</p>
+            <div class="mt-3 flex gap-3 text-sm">
+              <a class="cta" href="https://github.com/aayush2912/MEDIRISK-AI" target="_blank">Code</a>
             </div>
           </div>
         </article>
-        <article class="project-card">
-          <div class="p-4">
-            <img class="rounded-xl w-full h-40 object-cover" src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1200&auto=format&fit=crop" alt="Project cover" loading="lazy"/>
+
+        <!-- TaxiFlow -->
+        <article class="project-card overflow-hidden">
+          <div class="h-40 w-full overflow-hidden">
+            <img
+              class="w-full h-40 object-cover"
+              src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=1600&auto=format&fit=crop"
+              alt="NYC yellow cabs"
+              loading="lazy"
+              onerror="this.onerror=null;this.src='https://placehold.co/1200x400?text=NYC+Taxi';"
+            />
           </div>
-          <div class="px-5 pb-5">
-            <h3 class="text-lg font-semibold">MediRisk‑AI – Clinical Risk Platform</h3>
-            <p class="mt-1 text-sm text-white/70">Explainable risk prediction (LogReg/LGBM/CatBoost), SHAP, decision curves, Streamlit app.</p>
-            <div class="mt-3 flex flex-wrap gap-2 text-xs">
-              <span class="badge">LightGBM</span><span class="badge">CatBoost</span><span class="badge">SHAP</span><span class="badge">Streamlit</span>
-            </div>
-            <div class="mt-4 flex gap-3 text-sm">
-              <a class="cta" href="#" target="_blank">Live</a>
-              <a class="cta secondary" href="#" target="_blank">Code</a>
+          <div class="px-5 py-4">
+            <h3 class="text-lg font-semibold">TaxiFlow – Scalable NYC Taxi Data Pipeline</h3>
+            <p class="mt-1 text-sm text-white/70">ETL orchestration with Kestra, dbt modeling, BigQuery + Terraform infra; processes millions of taxi trips reliably.</p>
+            <div class="mt-3 flex gap-3 text-sm">
+              <a class="cta" href="https://github.com/aayush2912/TaxiFlow" target="_blank">Code</a>
             </div>
           </div>
         </article>
+
+        <!-- NewsVision -->
+        <article class="project-card overflow-hidden">
+          <div class="h-40 w-full overflow-hidden">
+            <img
+              class="w-full h-40 object-cover"
+              src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=1600&auto=format&fit=crop"
+              alt="Global news theme"
+              loading="lazy"
+              onerror="this.onerror=null;this.src='https://placehold.co/1200x400?text=Global+News';"
+            />
+          </div>
+          <div class="px-5 py-4">
+            <h3 class="text-lg font-semibold">NewsVision – AI-Powered Personalized News Recommendation System</h3>
+            <p class="mt-1 text-sm text-white/70">Hybrid SBERT + SVD recommender with Redis caching. Flask API, Streamlit UI, deployed behind NGINX on AWS.</p>
+            <div class="mt-3 flex gap-3 text-sm">
+              <a class="cta" href="https://github.com/aayush2912/NEWSVISION" target="_blank">Code</a>
+            </div>
+          </div>
+        </article>
+
       </div>
     </div>
   </section>
 
-  <!-- Experience -->
+  <!-- Experience (kept from your latest version) -->
   <section id="experience" class="section py-20">
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-2xl font-bold mb-8" data-aos="fade-up">Work Experience</h2>
-      <div class="relative border-l border-white/10 pl-6 space-y-10" data-aos="fade-up" data-aos-delay="100">
+      <div class="relative border-l border-white/10 pl-6 space-y-12" data-aos="fade-up" data-aos-delay="100">
+        <!-- Cap Bon Consulting -->
         <div class="timeline-item">
           <div class="dot"></div>
           <div>
-            <h3 class="font-semibold">ML Engineer / Research Assistant – Cap Bon Consulting</h3>
+            <h3 class="font-semibold">Machine Learning Engineer – Cap Bon Consulting</h3>
             <p class="text-xs text-white/60">Sep 2025 – Present · New York, USA</p>
-            <p class="mt-2 text-white/80 text-sm">Processed 20 years of tick data; engineered features (RSI, MACD, ATR, PCA). Improved Sharpe by 15–20% using LightGBM/XGBoost/LSTM; built modular pipeline for backtesting and experiment tracking.</p>
+            <div class="xp-grid grid md:grid-cols-2 gap-3 mt-3 text-white/80 text-sm">
+              <div class="xp-chip">Processed and structured 20 years of tick-level financial data (Gold, Silver, S&P 500) using Python, Pandas, NumPy, and SQL, implementing imputation, normalization, and outlier treatment that improved downstream model stability by 25%.</div>
+              <div class="xp-chip">Engineered features (RSI, MACD, ATR, rolling windows, lagged returns, PCA, regimes), boosting predictive accuracy and Sharpe ratio by 15–20%.</div>
+              <div class="xp-chip">Optimized ML models (LightGBM, XGBoost, KNN, RF, LSTM – PyTorch/TensorFlow) via GridSearchCV/Optuna → RMSE −18%, profitable-trade recall +22%.</div>
+              <div class="xp-chip">Built modular ML pipeline (ingestion → FE → training → backtesting → tuning), cutting runtime by 40% with reproducibility.</div>
+              <div class="xp-chip">Rigorous backtesting with Sharpe, Max Drawdown, CAGR, Precision/Recall, ROC AUC for robust strategy validation.</div>
+              <div class="xp-chip">Tracked 500+ experiments with structured reporting to enable peer review and reproducibility.</div>
+              <div class="xp-chip">Visualized signals/backtests via Matplotlib, Seaborn, Plotly for better interpretability.</div>
+            </div>
           </div>
         </div>
+        <!-- ANG Infotech -->
         <div class="timeline-item">
           <div class="dot"></div>
           <div>
             <h3 class="font-semibold">Software Engineer – ANG Infotech LLC</h3>
             <p class="text-xs text-white/60">Jul 2024 – May 2025 · New Jersey, USA</p>
-            <p class="mt-2 text-white/80 text-sm">Built ETL with Sqoop/MySQL/HDFS (↑ efficiency 40%); AWS RDS/SNS ops; Docker/K8s CI/CD (↓ deployment time 60%); predictive simulations in Python.</p>
+            <div class="xp-grid grid md:grid-cols-2 gap-3 mt-3 text-white/80 text-sm">
+              <div class="xp-chip">Reduced analysis time by 50% via Python (NumPy/Pandas) for 100GB+ datasets.</div>
+              <div class="xp-chip">Engineered ETL (Sqoop) moving 1TB+/day Oracle/MySQL → HDFS with robust error handling.</div>
+              <div class="xp-chip">Eliminated 40% redundant records via PySpark deduplication & cleansing algorithms.</div>
+              <div class="xp-chip">Automated financial data cleaning/transforms (Pandas/NumPy) → accuracy +30%.</div>
+              <div class="xp-chip">99.9% uptime for 10k+ users using AWS RDS + SNS for notifications.</div>
+              <div class="xp-chip">AWS (RDS, S3, Lambda) scheduling cut pipeline runtimes by ~40% with auditability.</div>
+              <div class="xp-chip">~90% test coverage via Python test suites + Jenkins CI/CD (Docker, K8s) and docs.</div>
+              <div class="xp-chip">SQL optimization + schema redesign → −60% query time (Oracle/MySQL).</div>
+              <div class="xp-chip">SQL output reconciliation & issue resolution for requirement consistency.</div>
+            </div>
           </div>
         </div>
+        <!-- Rutgers CSO -->
         <div class="timeline-item">
           <div class="dot"></div>
           <div>
-            <h3 class="font-semibold">Associate Solution Advisor – Deloitte</h3>
-            <p class="text-xs text-white/60">Jun 2022 – Aug 2023 · Bangalore, India</p>
-            <p class="mt-2 text-white/80 text-sm">Led 16 IT audits; identified 29 critical vulnerabilities using Python/SQL; automated risk workflows (↑ efficiency 45%); improved detection by 25% via ML.</p>
+            <h3 class="font-semibold">Community Service Officer – Rutgers University Police Department</h3>
+            <p class="text-xs text-white/60">Oct 2023 – Aug 2024 · New Brunswick, NJ</p>
+            <div class="xp-grid grid md:grid-cols-2 gap-3 mt-3 text-white/80 text-sm">
+              <div class="xp-chip">Proactive foot, bicycle, and vehicle patrols to maintain campus safety.</div>
+              <div class="xp-chip">After-hours safety escorts; Knight Mover Shuttle operations.</div>
+              <div class="xp-chip">Security checks at athletic events, residence halls, and buildings.</div>
+              <div class="xp-chip">Supported emergency response efforts as RUPD’s eyes and ears.</div>
+            </div>
           </div>
         </div>
+        <!-- Rutgers TA -->
+        <div class="timeline-item">
+          <div class="dot"></div>
+          <div>
+            <h3 class="font-semibold">Teaching Assistant – Rutgers University</h3>
+            <p class="text-xs text-white/60">Aug 2024 – May 2025 · New Brunswick, NJ</p>
+            <div class="xp-grid grid md:grid-cols-2 gap-3 mt-3 text-white/80 text-sm">
+              <div class="xp-chip">CS170 – Computer Applications for Business (2 semesters, ~60 students/term).</div>
+              <div class="xp-chip">Python, JavaScript, SQL, Excel, basic Java; Jupyter-based labs & walkthroughs.</div>
+              <div class="xp-chip">Office hours, targeted feedback; grading midterms/finals with integrity.</div>
+              <div class="xp-chip">Mentored diverse groups; linked CS concepts to business use cases.</div>
+            </div>
+          </div>
+        </div>
+        <!-- Deloitte -->
+        <div class="timeline-item">
+          <div class="dot"></div>
+          <div>
+            <h3 class="font-semibold">Associate Solution Analyst – Deloitte</h3>
+            <p class="text-xs text-white/60">Jun 2022 – Aug 2023 · Bengaluru, India</p>
+            <div class="xp-grid grid md:grid-cols-2 gap-3 mt-3 text-white/80 text-sm">
+              <div class="xp-chip">−40% analysis turnaround via automated dashboards & standardized reporting.</div>
+              <div class="xp-chip">95% accuracy in deliverables using ETL + validation frameworks (SQL/Python).</div>
+              <div class="xp-chip">20+ actionable insights/quarter through predictive models & stats analysis.</div>
+              <div class="xp-chip">4.8/5 client satisfaction across 10+ projects with strong requirements mgmt.</div>
+              <div class="xp-chip">15% faster project delivery via agile & automated testing.</div>
+              <div class="xp-chip">Supported SOX / SOC 1-2; surfaced 29+ vulnerabilities via risk analysis.</div>
+              <div class="xp-chip">Functional specs & ERDs; UAT scripts to reduce last-minute defects.</div>
+            </div>
+          </div>
+        </div>
+        <!-- Netmagic -->
+        <div class="timeline-item">
+          <div class="dot"></div>
+          <div>
+            <h3 class="font-semibold">Business Analyst Intern – Netmagic Solutions (NTT)</h3>
+            <p class="text-xs text-white/60">May 2021 – Sep 2021 · Mumbai, India</p>
+            <div class="xp-grid grid md:grid-cols-2 gap-3 mt-3 text-white/80 text-sm">
+              <div class="xp-chip">COBC review; compliance requirements & benchmarking vs. peers.</div>
+              <div class="xp-chip">Advanced Excel (PivotTables, Power Query, VLOOKUPs) for large datasets.</div>
+              <div class="xp-chip">Dashboards & reports on trends; supported HR decision-making.</div>
+              <div class="xp-chip">Data-backed insights to update compliance frameworks & policies.</div>
+            </div>
+          </div>
+        </div>
+        <!-- Clover Infotech -->
+        <div class="timeline-item">
+          <div class="dot"></div>
+          <div>
+            <h3 class="font-semibold">Java Developer Intern – Clover Infotech</h3>
+            <p class="text-xs text-white/60">May 2020 – Jul 2020 · Mumbai, India (Remote)</p>
+            <div class="xp-grid grid md:grid-cols-2 gap-3 mt-3 text-white/80 text-sm">
+              <div class="xp-chip">Bulk ID Creation (Java Servlets/Applets/JDBC) for Excel-driven approvals.</div>
+              <div class="xp-chip">Java/SQL validation against master tables to prevent duplicates/invalids.</div>
+              <div class="xp-chip">UI prototype (HTML/CSS/JS) with login, upload, and logging.</div>
+              <div class="xp-chip">Error handling/logging; BRD & functional specs from stakeholder needs.</div>
+              <div class="xp-chip">Contributed to solution later productized across multiple clients.</div>
+            </div>
+          </div>
+        </div>
+        <!-- NSEIT -->
+        <div class="timeline-item">
+          <div class="dot"></div>
+          <div>
+            <h3 class="font-semibold">SOC Analyst Intern – NSEIT Limited</h3>
+            <p class="text-xs text-white/60">May 2019 – Jul 2019 · Mumbai, India</p>
+            <div class="xp-grid grid md:grid-cols-2 gap-3 mt-3 text-white/80 text-sm">
+              <div class="xp-chip">Shadowed SOC analysts for incident monitoring & response.</div>
+              <div class="xp-chip">Assisted VAPT; documented findings for remediation.</div>
+              <div class="xp-chip">Prepared incident research summaries for risk assessments.</div>
+              <div class="xp-chip">Explored network security, threat detection & compliance.</div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
   <!-- Education -->
   <section id="education" class="section py-20">
-    <div class="max-w-5xl mx-auto px-4">
+    <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-2xl font-bold mb-8" data-aos="fade-up">Education</h2>
-      <div class="grid md:grid-cols-2 gap-6" data-aos="fade-up" data-aos-delay="100">
-        <div class="glass rounded-2xl border border-white/10 p-6">
-          <h3 class="font-semibold">MS in Data Science – Rutgers University</h3>
-          <p class="text-xs text-white/60">2013 – 2025 (GPA 3.61/4)</p>
-          <p class="mt-2 text-sm text-white/80">Focus: ML, NLP, Data Engineering, MLOps.</p>
+      <div class="grid md:grid-cols-3 gap-8" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="glass border border-white/10 rounded-2xl p-6">
+          <h3 class="font-semibold">Rutgers University</h3>
+          <p class="text-xs text-white/60">MS in Data Science (Dept. of Statistics) · Aug 2023 – May 2025</p>
+          <p class="mt-2 text-white/80 text-sm">GPA: 3.61/4.0</p>
+          <p class="mt-2 text-white/70 text-sm font-semibold">Key Coursework:</p>
+          <ul class="list-disc list-inside text-sm text-white/70 space-y-1 mt-1">
+            <li>Data Structures and Algorithms</li><li>Probability and Inference</li><li>Regression and Time Series</li><li>Data Wrangling</li><li>Data Management for Advanced Data Science Topics</li><li>Data Mining</li><li>Statistical Learning</li><li>Statistical Software</li><li>Natural Language Processing</li><li>Algorithmic Trading and Portfolio Management</li><li>Statistical Modeling</li>
+          </ul>
         </div>
-        <div class="glass rounded-2xl border border-white/10 p-6">
-          <h3 class="font-semibold">B.Tech IT & MBA Tech Mgmt – NMIMS</h3>
-          <p class="text-xs text-white/60">2017 – 2022 (CGPA 3.59/4)</p>
-          <p class="mt-2 text-sm text-white/80">Focus: Information Technology, Business Intelligence.</p>
+
+        <div class="glass border border-white/10 rounded-2xl p-6">
+          <h3 class="font-semibold">NMIMS University</h3>
+          <p class="text-xs text-white/60">MBA in Technology Management (BI & Analytics) · Jul 2021 – May 2022</p>
+          <p class="mt-2 text-white/80 text-sm">GPA: 3.59/4.0</p>
+          <p class="mt-2 text-white/70 text-sm font-semibold">Key Coursework:</p>
+          <ul class="list-disc list-inside text-sm text-white/70 space-y-1 mt-1">
+            <li>Programming for Analytics</li><li>Big Data Technology</li><li>Data Mining and Analytics</li><li>Python Programming</li><li>Quantitative Techniques</li><li>Spreadsheet Modeling</li><li>Predictive Modeling</li><li>Business Visualization</li><li>ETL, Data Gathering & Loading</li><li>Financial Analytics</li><li>Strategic Management</li>
+          </ul>
         </div>
+
+        <div class="glass border border-white/10 rounded-2xl p-6">
+          <h3 class="font-semibold">NMIMS University</h3>
+          <p class="text-xs text-white/60">B.Tech in Computer Science (Dept. of IT) · Aug 2017 – May 2021</p>
+          <p class="mt-2 text-white/80 text-sm">GPA: 3.59/4.0</p>
+          <p class="mt-2 text-white/70 text-sm font-semibold">Key Coursework:</p>
+          <ul class="list-disc list-inside text-sm text-white/70 space-y-1 mt-1 max-h-52 overflow-y-auto pr-2">
+            <li>Computer Programming</li><li>Engineering Mathematics</li><li>Data Structures and Algorithms</li><li>Digital Logic Design</li><li>Signals and Systems</li><li>Software Engineering</li><li>Web Programming</li><li>Advanced Java</li><li>Computer Networks</li><li>Database Management Systems</li><li>Microprocessors & Microcontrollers</li><li>Operating Systems</li><li>Human-Computer Interaction</li><li>Digital Signal Processing</li><li>Information Security</li><li>Wireless Networking</li><li>Service Oriented Architecture</li><li>Distributed Computing</li><li>Computer Simulation & Modeling</li><li>Object Oriented Analysis & Design</li><li>Artificial Intelligence</li><li>Data Warehousing & Mining</li>
+          </ul>
+        </div>
+
       </div>
     </div>
   </section>
@@ -317,6 +555,7 @@
       <h2 class="text-2xl font-bold">Resume</h2>
       <p class="mt-2 text-white/70">Download the latest copy of my resume.</p>
       <div class="mt-6">
+        <!-- Put your PDF here -->
         <a href="assets/Aayush_Pradhan_Resume.pdf" class="inline-block rounded-xl bg-accent-600 hover:bg-accent-500 px-6 py-3 font-semibold shadow-glow">Download PDF</a>
       </div>
       <p class="mt-3 text-xs text-white/50">Place your file at <code>/assets/Aayush_Pradhan_Resume.pdf</code></p>
@@ -327,7 +566,7 @@
   <section id="contact" class="section py-20">
     <div class="max-w-4xl mx-auto px-4 text-center">
       <h2 class="text-2xl font-bold" data-aos="fade-up">Get in touch</h2>
-      <p class="mt-2 text-white/70" data-aos="fade-up" data-aos-delay="50">Open to full‑time roles, research collaborations, and consulting.</p>
+      <p class="mt-2 text-white/70" data-aos="fade-up" data-aos-delay="50">Open to full-time roles, research collaborations, and consulting.</p>
       <div class="mt-6 flex items-center justify-center gap-4" data-aos="fade-up" data-aos-delay="100">
         <a class="cta" href="mailto:aayushpradhan29@gmail.com">Email</a>
         <a class="cta secondary" href="https://www.linkedin.com/in/aayush-pradhan-b26a00147" target="_blank">LinkedIn</a>
@@ -341,52 +580,97 @@
     <p class="text-xs">© <span id="year"></span> Aayush Pradhan. All rights reserved.</p>
   </footer>
 
-  <!-- Reusable atoms -->
-  <style>
-    .badge { display:inline-block; padding:.35rem .6rem; border-radius:.75rem; background:rgba(148,163,184,.12); border:1px solid rgba(255,255,255,.08); }
-    .cta { display:inline-block; padding:.55rem .9rem; border-radius:.9rem; background:rgba(99,102,241,.2); border:1px solid rgba(99,102,241,.4); }
-    .cta:hover { background:rgba(99,102,241,.3); }
-    .cta.secondary { background:transparent; border:1px solid rgba(255,255,255,.15); }
-    .project-card { background: rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:1.25rem; overflow:hidden; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
-    .timeline-item { position: relative; }
-    .timeline-item .dot { position:absolute; left:-10px; top:.35rem; width:.75rem; height:.75rem; border-radius:9999px; background:#6366f1; box-shadow:0 0 0 4px rgba(99,102,241,.15); }
-  </style>
+  <!-- Projects Modal (See more) -->
+  <div id="projectsModal" class="fixed inset-0 z-[60] hidden">
+    <div class="absolute inset-0 bg-black/70"></div>
+    <div class="relative mx-auto max-w-6xl px-4 py-10">
+      <div class="glass border border-white/10 rounded-2xl p-6 shadow-glow">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-xl font-semibold">More Projects</h3>
+          <button id="closeProjects" class="rounded-md border border-white/15 px-2 py-1 text-sm">Close</button>
+        </div>
+        <p class="text-white/70 text-sm mb-4">Extended list with code links.</p>
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
+          <div class="project-card p-4">
+            <h4 class="font-semibold">OncoRisk AI — Breast Cancer Malignancy Prediction</h4>
+            <p class="text-white/70 text-sm mt-1">Explainable ML for malignancy risk; SHAP insights and calibrated thresholds.</p>
+            <div class="mt-3 flex gap-3 text-sm"><a class="cta" href="https://github.com/aayush2912/OncoRiskAI" target="_blank">Code</a></div>
+          </div>
+          <div class="project-card p-4">
+            <h4 class="font-semibold">CrAIpto — Crypto Forecasting & Analytics</h4>
+            <p class="text-white/70 text-sm mt-1">LSTM + XGBoost hybrid with drift detection and auto-retraining; Streamlit analytics.</p>
+            <div class="mt-3 flex gap-3 text-sm"><a class="cta" href="https://github.com/aayush2912/CrAIpto" target="_blank">Code</a></div>
+          </div>
+          <div class="project-card p-4">
+            <h4 class="font-semibold">TelcoChurn — Churn Prediction with Survival Analysis</h4>
+            <p class="text-white/70 text-sm mt-1">Classification + survival modeling; class imbalance handling and business-focused metrics.</p>
+            <div class="mt-3 flex gap-3 text-sm"><a class="cta" href="https://github.com/aayush2912/ML-Classification-Churn-Prediction-project" target="_blank">Code</a></div>
+          </div>
+          <div class="project-card p-4">
+            <h4 class="font-semibold">LoanRiskX — Credit Risk Scoring</h4>
+            <p class="text-white/70 text-sm mt-1">Feature engineering, XGBoost/LogReg baselines, ROC-AUC; API packaging.</p>
+            <div class="mt-3 flex gap-3 text-sm"><a class="cta" href="https://github.com/aayush2912/Credit-Scoring" target="_blank">Code</a></div>
+          </div>
+          <div class="project-card p-4">
+            <h4 class="font-semibold">DeepWear — Fashion Recognition</h4>
+            <p class="text-white/70 text-sm mt-1">Transfer learning for apparel classification with robust evaluation.</p>
+            <div class="mt-3 flex gap-3 text-sm"><a class="cta" href="https://github.com/aayush2912/Classification-NN-DL" target="_blank">Code</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 700, once: true, offset: 80 });
 
-    // Mobile menu toggle
+    // Mobile menu
     const mb = document.getElementById('menuBtn');
     const mnav = document.getElementById('mobileNav');
-    if (mb) mb.addEventListener('click', () => mnav.classList.toggle('hidden'));
+    mb && mb.addEventListener('click', () => mnav.classList.toggle('hidden'));
 
-    // Theme toggle (dark <-> dimmed)
+    // Theme toggle + particles
     const toggle = document.getElementById('themeToggle');
-    toggle?.addEventListener('click', () => {
-      document.body.classList.toggle('invert');
-      document.body.classList.toggle('hue-rotate-15');
+    const loadParticles = (isNetflix=false) => {
+      const palette = isNetflix ? ['#e50914', '#f40612', '#ffffff'] : ['#60a5fa', '#6366f1', '#22d3ee'];
+      const existing = tsParticles.domItem(0); if (existing) existing.destroy();
+      tsParticles.load({ id: 'tsparticles', options: {
+        background: { color: 'transparent' }, fpsLimit: 50,
+        particles: {
+          number: { value: 50, density: { enable: true, area: 800 } },
+          color: { value: palette }, opacity: { value: 0.2 },
+          size: { value: { min: 1, max: 3 } }, move: { enable: true, speed: 0.6 },
+          links: { enable: true, opacity: 0.15, distance: 120, color: isNetflix ? '#e50914' : undefined }
+        }, detectRetina: true, fullScreen: { enable: false }
+      }});
+    };
+    loadParticles(false);
+    toggle && toggle.addEventListener('click', () => {
+      const useNetflix = !document.body.classList.contains('netflix');
+      document.body.classList.toggle('netflix', useNetflix);
+      toggle.textContent = useNetflix ? 'Blue Theme' : 'Netflix Theme';
+      loadParticles(useNetflix);
     });
 
     // Year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Particles (subtle, performant)
-    (async () => {
-      const engine = await tsParticles.load({ id: 'tsparticles', options: {
-        background: { color: 'transparent' },
-        fpsLimit: 50,
-        particles: {
-          number: { value: 50, density: { enable: true, area: 800 } },
-          color: { value: ['#60a5fa', '#6366f1', '#22d3ee'] },
-          opacity: { value: 0.2 },
-          size: { value: { min: 1, max: 3 } },
-          move: { enable: true, speed: 0.6 },
-          links: { enable: true, opacity: 0.15, distance: 120 }
-        },
-        detectRetina: true, fullScreen: { enable: false }
-      }});
+    // Projects modal
+    (function(){
+      const seeMoreBtn = document.getElementById('seeMoreBtn');
+      const modal = document.getElementById('projectsModal');
+      const closeBtn = document.getElementById('closeProjects');
+      const toggleModal = (show) => {
+        if (!modal) return;
+        modal.classList.toggle('hidden', !show);
+        document.body.style.overflow = show ? 'hidden' : '';
+      };
+      seeMoreBtn && seeMoreBtn.addEventListener('click', () => toggleModal(true));
+      closeBtn && closeBtn.addEventListener('click', () => toggleModal(false));
+      modal && modal.addEventListener('click', (e) => { if (e.target === modal) toggleModal(false); });
+      window.addEventListener('keydown', (e) => { if (e.key === 'Escape') toggleModal(false); });
     })();
   </script>
 </body>
